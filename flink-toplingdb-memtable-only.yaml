@@ -1,0 +1,20 @@
+MemTableRepFactory:
+  skiplist:
+    class: SkipList
+    params:
+      lookahead: 0
+
+  cspp:
+    class: cspp
+    params:
+      mem_cap: 1G
+      convert_to_sst: kFileMmap
+
+DBOptions:
+  dbo: {}  # must exist (Flink uses update_from: "dbo")
+
+CFOptions:
+  default:
+    # choose ONE by changing the reference below:
+    memtable_factory: "${cspp}"
+    # memtable_factory: "${skiplist}"
